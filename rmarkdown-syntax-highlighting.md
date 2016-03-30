@@ -1,20 +1,13 @@
----
-title: "Syntax Highlighting in RMarkdown"
-author: "Curtis Alexander"
-output: 
-  html_document:
-    css: highlight.css
-    highlight: pygments
-    keep_md: yes
-    theme: readable
----
+# Syntax Highlighting in RMarkdown
+Curtis Alexander  
 
 ### Preamble
 Thanks to [Yihui](https://github.com/yihui/knitr/issues/1185), I now know that RMarkdown utilizes the [highlighting-kate](https://github.com/jgm/highlighting-kate) syntax highlighter.  The list of languages that are supported can be found [here](https://github.com/jgm/highlighting-kate/tree/master/xml).
 
 If I understand correctly, there is a three step process to take an `Rmd` file and produce an `HTML` file.  Forgive the rough pseudo code.
 
-```{r eval=FALSE}
+
+```r
 md <- Rmd %>% knitr
 html <- md %>% rmarkdown %>% pandoc
 ```
@@ -41,7 +34,8 @@ Below is the actual source hook needed.  It is based on an example from [Ramnath
 
 The source hook actually works with other languages as well.  See the [Alternative Syntax Highlighting](#alternative-syntax-highlighting) section below.
 
-```{r setup}
+
+```r
 knitr::knit_hooks$set(source = function(x, options) {
   if (!is.null(options$hilang)) {
       code_open <- "\n\n<div class=\"sourceCode\">\n<pre class=\"sourceCode\">\n<code class=\"sourceCode\">"
@@ -73,12 +67,16 @@ run;
 
 then the result would be the following.
 
-```{r eval = FALSE, hilang = 'sas'}
-data _null_;
-  x = 1;
-  /* comment */
-run;
-```
+
+<div class="sourceCode">
+<pre class="sourceCode">
+<code class="sourceCode"><span class="hl kwb">data</span> _null_<span class="hl opt">;</span>
+  x <span class="hl opt">=</span> <span class="hl num">1</span><span class="hl opt">;</span>
+  <span class="hl com">/* comment */</span>
+<span class="hl kwb">run</span><span class="hl opt">;</span>
+</code>
+</pre>
+</div>
 
 **Note:** in order to display the backticks and chunk options, I followed the guidance at the [RMarkdown site](http://rmarkdown.rstudio.com/articles_verbatim.html).
 
@@ -90,15 +88,19 @@ In order to utilize the source hook, the syntax name passed to the `hilang` chun
 As another example, below is code taken from the [Go](https://golang.org/) language's home page.
 
 
-```{r eval = FALSE, hilang = 'go'}
-package main
 
-import "fmt"
+<div class="sourceCode">
+<pre class="sourceCode">
+<code class="sourceCode"><span class="hl kwa">package</span> main
 
-func main() {
-	fmt.Println("Hello, 世界")
-}
-```
+<span class="hl kwa">import</span> <span class="hl str">&quot;fmt&quot;</span>
+
+<span class="hl kwa">func</span> <span class="hl kwd">main</span><span class="hl opt">() {</span>
+	fmt<span class="hl opt">.</span><span class="hl kwd">Println</span><span class="hl opt">(</span><span class="hl str">&quot;Hello, 世界&quot;</span><span class="hl opt">)</span>
+<span class="hl opt">}</span>
+</code>
+</pre>
+</div>
 
 ### Assumptions
 * The following R packages need to be installed:
