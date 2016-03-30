@@ -1,0 +1,110 @@
+---
+title: "Syntax Highlighting in RMarkdown"
+author: "Curtis Alexander"
+output: 
+  html_document:
+    highlight: pygments
+    css: highlight.css
+---
+
+### Preamble
+Thanks to [Yihui](https://github.com/yihui/knitr/issues/1185), I now know that RMarkdown utilizes the [highlighting-kate](https://github.com/jgm/highlighting-kate) syntax highlighter.  The list of languages that are supported can be found [here](https://github.com/jgm/highlighting-kate/tree/master/xml).
+
+If I understand correctly, there is a three step process to take an `Rmd` file and produce an `HTML` file.  Forgive the rough pseudo code.
+
+```{r eval=FALSE}
+md <- Rmd %>% knitr
+html <- md %>% rmarkdown %>% pandoc
+```
+
+### SAS Syntax Highlighting 
+Unfortunately, I wanted to be able to get SAS highlighting to work within RMarkdown. This would require me submitting a pull request to [highlighting-kate](https://github.com/jgm/highlighting-kate).  Rather than creating a syntax file, I set about figuring out how to make use of `knitr` and the `highr` package to get the highlighting I was after.
+
+Below is an example of highlighting SAS code within an RMarkdown document.  I _thought_ you could simply use the `{r engine = 'sas', eval = FALSE}` chunk options to highlight SAS code.  Unfortunately this does not work as the highlighting is being done by `pandoc` and not `knitr`.
+
+Instead, I created a source hook to appropriately highlight and display the SAS code.  The SAS code is put through the [highlight](http://www.andre-simon.de/doku/highlight/en/highlight.php) syntax highlighting program via the [highr](https://cran.r-project.org/web/packages/highr/index.html) package.  The resulting SAS + CSS code is wrapped in the appropriate html tags using the source hook, which produces HTML of the form below within the RMarkdown document.
+
+```
+<div class="sourceCode">
+  <pre class="sourceCode">
+    <code class="sourceCode">
+    ** SAS code + CSS goes here **
+    </code>
+  </pre> 
+</div>
+```
+
+### Source Hook
+Below is the actual source hook needed.  It is based on an example from [Ramnath Vaidyanathan](http://ramnathv.github.io/posts/verbatim-chunks-knitr/index.html) and **tons** of trial and error.
+
+The source hook actually works with other languages as well.  See the [Alternative Syntax Highlighting](#alternative-syntax-highlighting) section below.
+
+```{r setup}
+knitr::knit_hooks$set(source = function(x, options) {
+  if (!is.null(options$hilang)) {
+      code_open <- "\n\n<div class=\"sourceCode\">\n<pre class=\"sourceCode\">\n<code class=\"sourceCode\">"
+      code_close <- "\n</code>\n</pre>\n</div>\n"
+      code_body <- highr::hi_andre(x, language = options$hilang, format = "html")
+    stringr::str_c(
+      code_open,
+      knitr:::indent_block(paste(code_body, collapse = '\n'), ""),
+      code_close
+    )
+  } else {
+    stringr::str_c("\n\n```", tolower(options$engine), "\n",
+                   paste(x, collapse = '\n'), "\n```\n\n")
+      
+  }
+})
+```
+
+When you want to actually highlight SAS code, you need utilize the `eval = FALSE` and `hilang = 'sas'` options rather than utilizing the `engine = 'sas'` option.
+
+For example, if you put the following within your RMarkdown document 
+
+<div class="sourceCode"><pre class="sourceCode"><code class="sourceCode">```{r eval = FALSE, hilang = 'sas'}
+data _null_;
+  x = 1;
+  /* comment */
+run;
+```</code></pre></div>
+
+then the result would be the following.
+
+```{r eval = FALSE, hilang = 'sas'}
+data _null_;
+  x = 1;
+  /* comment */
+run;
+```
+
+**Note:** in order to display the backticks and chunk options, I followed the guidance at the [RMarkdown site](http://rmarkdown.rstudio.com/articles_verbatim.html).
+
+### Alternative Syntax Highlighting
+The source hook allows for highlighting any source code that the [highlight](http://www.andre-simon.de/doku/highlight/en/highlight.php) program supports.  A full list can be found [here](http://www.andre-simon.de/doku/highlight/en/langs.php).
+
+In order to utilize the source hook, the syntax name passed to the `hilang` chunk option must match the name needed for the `highlight` program.  A full list of specific names can be found at the webpage above or by running `highlight --list-langs` from the command line.
+
+As another example, below is code taken from the [Go](https://golang.org/) language's home page.
+
+
+```{r eval = FALSE, hilang = 'go'}
+package main
+
+import "fmt"
+
+func main() {
+	fmt.Println("Hello, 世界")
+}
+```
+
+### Assumptions
+* The following R packages need to be installed:
+    * [highr](https://cran.r-project.org/web/packages/highr/index.html)
+    * [stringr](https://cran.r-project.org/web/packages/stringr/index.html)
+* The [highlight](http://www.andre-simon.de/doku/highlight/en/highlight.php) program needs to be installed.
+* Use the `css: highlight.css` option within the YAML header of your RMarkdown file.  The `highlight.css` file is the CSS file produced by the `highlight` program.  It can be copied to the appropriate directory after running the following.
+
+```
+highlight --print-style
+```
