@@ -62,7 +62,7 @@ knitr::knit_hooks$set(source = function(x, options) {
 
 When you want to actually highlight SAS code, you need utilize the `eval = FALSE` and `hilang = 'sas'` options rather than utilizing the `engine = 'sas'` option.
 
-For example, if you put the following within your RMarkdown document 
+For example, if you add the following to your RMarkdown document 
 
 <div class="sourceCode"><pre class="sourceCode"><code class="sourceCode">```{r eval = FALSE, hilang = 'sas'}
 data _null_;
