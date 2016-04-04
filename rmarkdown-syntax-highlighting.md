@@ -78,7 +78,7 @@ then the result would be the following.
 </pre>
 </div>
 
-**Note:** in order to display the backticks and chunk options, I followed the guidance at the [RMarkdown site](http://rmarkdown.rstudio.com/articles_verbatim.html).
+**Note:** in order to display the backticks and chunk options, I followed the [article](http://rmarkdown.rstudio.com/articles_verbatim.html) by Jenny Bryan at the RMarkdown site.
 
 ### Alternative Syntax Highlighting
 The source hook allows for highlighting any source code that the [highlight](http://www.andre-simon.de/doku/highlight/en/highlight.php) program supports.  A full list can be found [here](http://www.andre-simon.de/doku/highlight/en/langs.php).
