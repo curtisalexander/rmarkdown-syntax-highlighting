@@ -17,7 +17,7 @@ Unfortunately, I wanted SAS highlighting to work within RMarkdown. This would re
 
 Below is an example of highlighting SAS code within an RMarkdown document.  I _thought_ you could simply use the `{r engine = 'sas', eval = FALSE}` chunk options to highlight SAS code.  Unfortunately this does not work as the highlighting is being done by `pandoc` and not `knitr`.
 
-Instead, I created a source hook to appropriately highlight and display the SAS code.  The SAS code is put through the [highlight](http://www.andre-simon.de/doku/highlight/en/highlight.php) syntax highlighting program via the [highr](https://cran.r-project.org/web/packages/highr/index.html) package.  The resulting SAS + CSS code is wrapped in the appropriate html tags using the source hook, which produces HTML of the form below within the RMarkdown document.
+Instead, I created a source hook to appropriately highlight and display the SAS code.  The SAS code is put through the [highlight](http://www.andre-simon.de/doku/highlight/en/highlight.php) syntax highlighting program via the [highr](https://cran.r-project.org/web/packages/highr/index.html) package.  The resulting SAS + CSS code is wrapped in the appropriate html tags using the source hook, which produces HTML within the RMarkdown document of the form below.
 
 ```
 <div class="sourceCode">
