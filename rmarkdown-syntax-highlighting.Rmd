@@ -20,7 +20,7 @@ html <- md %>% rmarkdown %>% pandoc
 ```
 
 ### SAS Syntax Highlighting 
-Unfortunately, I wanted SAS highlighting to work within RMarkdown. This would require me submitting a pull request to [highlighting-kate](https://github.com/jgm/highlighting-kate).  Rather than creating a syntax file, I set about figuring out how to make use of `knitr` and the `highr` package to get the highlighting I was after.
+Unfortunately, I wanted SAS highlighting to work within RMarkdown. This would require me submitting a pull request to [highlighting-kate](https://github.com/jgm/highlighting-kate) for SAS highlighting.  Rather than creating a syntax file, I set about figuring out how to make use of `knitr` and the `highr` package to get the highlighting I was after.
 
 Below is an example of highlighting SAS code within an RMarkdown document.  I _thought_ you could simply use the `{r engine = 'sas', eval = FALSE}` chunk options to highlight SAS code.  Unfortunately this does not work as the highlighting is being done by `pandoc` and not `knitr`.
 
