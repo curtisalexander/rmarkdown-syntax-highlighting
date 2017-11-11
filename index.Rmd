@@ -10,7 +10,7 @@ output:
 ---
 
 ### Update
-For an alternative method for performing syntax highlighting using Javascript libraries rather than the [highr](https://github.com/yihui/highr) package, see my blog post at https://calex.org/rmarkdown-syntax-highlighting.
+For an alternative method for performing syntax highlighting using Javascript libraries rather than the [highr](https://github.com/yihui/highr) package, see my blog post at https://calex.org/blog/r-markdown-syntax-highlighting.
 
 
 ### Preamble
