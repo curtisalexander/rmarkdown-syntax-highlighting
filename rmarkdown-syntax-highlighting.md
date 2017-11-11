@@ -1,5 +1,18 @@
-# Syntax Highlighting in RMarkdown
-Curtis Alexander  
+---
+title: "Syntax Highlighting in RMarkdown"
+author: "Curtis Alexander"
+output: 
+  html_document:
+    css: highlight.css
+    highlight: pygments
+    keep_md: yes
+    theme: readable
+    mathjax: null
+---
+
+### Update
+For an alternative method for performing syntax highlighting using Javascript libraries rather than the [highr](https://github.com/yihui/highr) package, see my blog post at https://calex.org/rmarkdown-syntax-highlighting.
+
 
 ### Preamble
 Thanks to [Yihui](https://github.com/yihui/knitr/issues/1185), I now know that RMarkdown utilizes the [highlighting-kate](https://github.com/jgm/highlighting-kate) syntax highlighter.  The list of languages that are supported can be found [here](https://github.com/jgm/highlighting-kate/tree/master/xml).
