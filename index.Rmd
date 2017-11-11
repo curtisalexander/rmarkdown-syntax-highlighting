@@ -112,5 +112,5 @@ func main() {
 * Use the `css: highlight.css` option within the YAML header of your RMarkdown file.  The `highlight.css` file is the CSS file produced by the `highlight` program.  It can be copied to the appropriate directory after running the following.
 
 ```
-highlight --print-style
+highlight --print-style --style-outfile=highlight.css
 ```
