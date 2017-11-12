@@ -9,14 +9,17 @@ output:
     mathjax: null
 ---
 
-### Update (2017-11-11)
+> Update (2017-11-11)
+<br/><br/>
 For an alternative method for performing syntax highlighting using the [CodeMirror](https://codemirror.net/) Javascript text editor rather than the [highr](https://github.com/yihui/highr) package (which is described below), see my blog post at https://calex.org/blog/r-markdown-syntax-highlighting.
 
 
 ### Preamble
 Thanks to [Yihui](https://github.com/yihui/knitr/issues/1185), I now know that R Markdown utilizes the [highlighting-kate](https://github.com/jgm/highlighting-kate) syntax highlighter.  The list of languages that are supported can be found [here](https://github.com/jgm/highlighting-kate/tree/master/xml).
 
-> **Update**: Currently, [pandoc](https://pandoc.org) utilizes the [skylighting](https://github.com/jgm/skylighting) Haskell library for highlighting.
+> Update (2017-11-11)
+<br/><br/>
+Currently, [pandoc](https://pandoc.org) utilizes the [skylighting](https://github.com/jgm/skylighting) Haskell library for highlighting.
 
 If I understand correctly, there is a three step process to take an `Rmd` file and produce an `HTML` file.  Forgive the rough pseudo code.
 
