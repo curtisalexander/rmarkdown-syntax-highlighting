@@ -152,13 +152,13 @@ $(document).ready(function () {
 
 
 <blockquote>
-<p>Update (2017-11-11) <br /><br /> For an alternative method for performing syntax highlighting using the <a href="https://codemirror.net/">CodeMirror</a> Javascript text editor rather than the <a href="https://github.com/yihui/highr">highr</a> package (which is described below), see my blog post at <a href="https://calex.org/blog/r-markdown-syntax-highlighting" class="uri">https://calex.org/blog/r-markdown-syntax-highlighting</a>.</p>
+<p><strong>Update (2017-11-11)</strong> <br /> For an alternative method for performing syntax highlighting using the <a href="https://codemirror.net/">CodeMirror</a> Javascript text editor rather than the <a href="https://github.com/yihui/highr">highr</a> package (which is described below), see my blog post at <a href="https://calex.org/blog/r-markdown-syntax-highlighting" class="uri">https://calex.org/blog/r-markdown-syntax-highlighting</a>.</p>
 </blockquote>
 <div id="preamble" class="section level3">
 <h3>Preamble</h3>
 <p>Thanks to <a href="https://github.com/yihui/knitr/issues/1185">Yihui</a>, I now know that R Markdown utilizes the <a href="https://github.com/jgm/highlighting-kate">highlighting-kate</a> syntax highlighter. The list of languages that are supported can be found <a href="https://github.com/jgm/highlighting-kate/tree/master/xml">here</a>.</p>
 <blockquote>
-<p>Update (2017-11-11) <br /><br /> Currently, <a href="https://pandoc.org">pandoc</a> utilizes the <a href="https://github.com/jgm/skylighting">skylighting</a> Haskell library for highlighting.</p>
+<p><strong>Update (2017-11-11)</strong> <br /> Currently, <a href="https://pandoc.org">pandoc</a> utilizes the <a href="https://github.com/jgm/skylighting">skylighting</a> Haskell library for highlighting.</p>
 </blockquote>
 <p>If I understand correctly, there is a three step process to take an <code>Rmd</code> file and produce an <code>HTML</code> file. Forgive the rough pseudo code.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">md &lt;-<span class="st"> </span>Rmd <span class="op">%&gt;%</span><span class="st"> </span>knitr
